@@ -1,0 +1,7 @@
+{
+  "name": "shopping_mobile",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
