@@ -22,7 +22,7 @@ export class TabsPage {
     this.basketService.getBasket().subscribe({
       next: (res: any) => {
         this.total = 0;
-        console.log(res.data);
+        //console.log(res.data);
         res.data.forEach((item: any) => {
           this.total += item.product.price * item.quantity;
         });

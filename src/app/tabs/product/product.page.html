@@ -5,8 +5,8 @@
 </ion-header>
 
 <ion-content>
-  <ion-searchbar placeholder="Search..."></ion-searchbar>
-  <ion-card *ngFor="let product of products">
+  <ion-searchbar [(ngModel)]="filterText" placeholder="Search..."></ion-searchbar>
+  <ion-card *ngFor="let product of products | productPipe:filterText">
     <ion-card-header class="ion-text-center">
       <ion-card-subtitle> {{product.name}} </ion-card-subtitle>
       <ion-card-title> {{product.price | currency: 'TRY':'symbol-narrow':'1.2-2'}} </ion-card-title>
@@ -24,7 +24,7 @@
           <ion-icon name="add-circle-outline"></ion-icon>
         </ion-button>
       </ion-item>
-      <ion-button expand="block" fill="outline" shape="round">
+      <ion-button (click)="addBasket(product)" expand="block" fill="outline" shape="round">
         <ion-icon slot="start" name="add"></ion-icon>
         Add Product
       </ion-button>

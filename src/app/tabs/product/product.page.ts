@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ToastController } from '@ionic/angular';
+import { LoadingController, ToastController } from '@ionic/angular';
 import { BasketModel } from '../basket/models/basket-model';
 import { BasketService } from '../basket/services/basket.service';
 import { ErrorService } from '../services/error.service';
@@ -15,27 +15,36 @@ export class ProductPage {
 
   products: ProductModel[] = [];
   quantity = 1;
+  isLoading = false;
+  filterText = '';
 
   constructor(
     private productService: ProductService,
     private basketService: BasketService,
     private errorService: ErrorService,
-    private toastrService: ToastController
+    private toastrService: ToastController,
+    private loadingCtrl: LoadingController
   ) { }
 
   ngOnInit() {
     this.getProducts();
   }
 
-  getProducts() {
+  async getProducts() {
+    // this.isLoading = true;
+    // this.showLoading();
     this.productService.getProducts().subscribe({
       next: (res: any) => {
-        this.products = res.data;        
-      }, error: (err: any) => this.errorService.errorHandler(err) 
+        this.products = res.data;
+        // this.isLoading = false;
+        // this.hideLoading();
+      }, error: (err: any) => {this.hideLoading(); this.errorService.errorHandler(err)}
     });
   }
 
   addBasket(product: ProductModel) {
+    // this.isLoading = true;
+    // this.showLoading();
     const basketModel: BasketModel = new BasketModel();
     const quantity = document.getElementById('name-' + product.id)?.innerHTML;
     basketModel.productId = product.id;
@@ -45,7 +54,10 @@ export class ProductPage {
     this.basketService.addBasket(basketModel).subscribe({
       next: (res: any) => {
         this.presentToast('Product added to basket');
-      }, error: (err: any) => this.errorService.errorHandler(err)
+        // this.isLoading = false;
+        // this.hideLoading();
+        this.getProducts();
+      }, error: (err: any) => {this.hideLoading(); this.errorService.errorHandler(err)}
     });
   }
 
@@ -68,15 +80,37 @@ export class ProductPage {
       return;
     }else {
       this.quantity--;
-    }    
+    }
   }
 
   async presentToast(_msg: string) {
     const toast = await this.toastrService.create({
       message: _msg,
-      duration: 2000
+      duration: 2000,
+      position: 'top'
     });
     toast.present();
+  }
+
+  async showLoading() {
+    this.isLoading = true;
+    return await this.loadingCtrl.create({
+      message: 'Loading...',
+      //duration: 2000,
+      spinner: 'circles',
+    }).then(a => {
+      a.present().then(() => {
+        //console.log('presented');
+        if (!this.isLoading) {
+          a.dismiss().then();
+        }
+      });
+    });
+  }
+
+  async hideLoading() {
+    this.isLoading = false;
+    return await this.loadingCtrl.dismiss().then();
   }
 
 }

@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProductPage } from './product.page';
 import { ProductPageRoutingModule } from './product-routing.module';
+import { ProductPipe } from './pipes/product.pipe';
 //import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -14,6 +15,6 @@ import { ProductPageRoutingModule } from './product-routing.module';
     //BrowserAnimationsModule,
     ProductPageRoutingModule
   ],
-  declarations: [ProductPage]
+  declarations: [ProductPage, ProductPipe]
 })
 export class ProductPageModule {}
