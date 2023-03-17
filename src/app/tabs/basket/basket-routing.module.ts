@@ -6,6 +6,10 @@ const routes: Routes = [
   {
     path: '',
     component: BasketPage,
+  },
+  {
+    path: 'payment',
+    loadChildren: () => import('./payment/payment.module').then( m => m.PaymentPageModule)
   }
 ];
 

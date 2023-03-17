@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LoadingController, ToastController } from '@ionic/angular';
+import { LoadingController, ToastController, ViewDidEnter } from '@ionic/angular';
 import { BasketModel } from '../basket/models/basket-model';
 import { BasketService } from '../basket/services/basket.service';
 import { ErrorService } from '../services/error.service';
@@ -11,7 +11,7 @@ import { ProductService } from './services/product.service';
   templateUrl: 'product.page.html',
   styleUrls: ['product.page.scss']
 })
-export class ProductPage {
+export class ProductPage implements ViewDidEnter {
 
   products: ProductModel[] = [];
   quantity = 1;
@@ -25,10 +25,12 @@ export class ProductPage {
     private toastrService: ToastController,
     private loadingCtrl: LoadingController
   ) { }
-
-  ngOnInit() {
+  
+  ionViewDidEnter(): void {
     this.getProducts();
   }
+
+  //ngOnInit() { }
 
   async getProducts() {
     // this.isLoading = true;

@@ -7,9 +7,46 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Basket</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-card>
+    <ion-card-header class="ion-text-center">
+      <ion-card-subtitle> Total Payment </ion-card-subtitle>
+      <ion-card-title>{{total | currency: 'TRY':'symbol-narrow':'1.2-2'}}</ion-card-title>
+      <ion-button routerLink="/tabs/basket/payment" expand="block" shape="round">
+        Checkout
+      </ion-button>
+    </ion-card-header>
+  
+    <ion-card-content>
+
+      <ion-card *ngFor="let basket of basketModel let index = index">
+        <ion-card-content>
+          <ion-label class="ion-text-center">
+            #{{ index + 1 }}            
+            <!-- {{ basket?.quantity + ' x ' + basket?.product?.name + ' - ' + ((basket?.quantity) * (basket?.product?.price)) | currency: 'TRY':'symbol-narrow':'1.2-2'  }} -->
+            <!-- (basket.product?.price)) | currency: 'TRY':'symbol-narrow':'1.2-2' -->
+          </ion-label>
+         
+      </ion-card-content>
+
+        <ion-card-header class="ion-text-center">
+          <ion-card-subtitle> {{ basket.quantity }} x {{ basket.product?.price | currency: 'TRY':'symbol-narrow':'1.2-2' }} </ion-card-subtitle>
+          <ion-card-title>{{ basket.product?.name }}</ion-card-title>
+        </ion-card-header>
+        <ion-button (click)="presentAlert(basket)" expand="block" color="danger">
+          <ion-icon name="trash-outline"></ion-icon>              
+        </ion-button>
+      
+      </ion-card>
+
+
+      <!-- <ion-list [inset]="true">
+        <ion-item *ngFor="let basket of basketModel let index = index">
+          <ion-label>
+            {{ index + 1 }}. {{ basket.product?.name }} - {{ basket.quantity }} x {{ basket.product?.price | currency: 'TRY':'symbol-narrow':'1.2-2' }}            
+          </ion-label>
+        </ion-item>
+      </ion-list> -->
+     
+    </ion-card-content>
+  </ion-card>
 </ion-content>
