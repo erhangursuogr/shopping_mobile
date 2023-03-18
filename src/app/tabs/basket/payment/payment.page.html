@@ -16,15 +16,15 @@
     </ion-card-header>
 
     <ion-card-content>
-      <form #form="ngForm">        
-      
+      <form #form="ngForm">
+
       <ion-item>
         <ion-label position="floating">Card Number</ion-label>
         <ion-input ngModel name="cardNumber" type="number" placeholder="1234 5678 9012 3456"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Card Holder</ion-label>
-        <ion-input ngModel name="cardOwner" type="text" placeholder="John Doe"></ion-input>        
+        <ion-input ngModel name="cardOwner" type="text" placeholder="John Doe"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Expiration Date</ion-label>
@@ -35,8 +35,8 @@
         <ion-input ngModel name="cvv" type="number" placeholder="123"></ion-input>
       </ion-item>
     </form>
-    <ion-col>    
-    <ion-button (click)="payment(form)" expand="block" shape="round" color="success">
+    <ion-col>
+    <ion-button (click)="addPayment(form)" expand="block" shape="round" color="success">
       <ion-icon name="card-outline"></ion-icon>
       Pay with Card
     </ion-button>
@@ -45,6 +45,6 @@
     </ion-card-content>
   </ion-card>
 
-  
+
 
 </ion-content>

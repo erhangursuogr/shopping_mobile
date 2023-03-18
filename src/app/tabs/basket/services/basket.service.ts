@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { ToastController } from '@ionic/angular';
+import { catchError, Observable, of, throwError } from 'rxjs';
 import { ErrorService } from '../../services/error.service';
 import { BasketModel } from '../models/basket-model';
 
@@ -11,7 +12,7 @@ export class BasketService {
 
   constructor(
     @Inject('apiUrl') private apiUrl: string,
-    private httpClient: HttpClient    
+    private httpClient: HttpClient
   ) { }
 
   getBasket() {
@@ -22,10 +23,13 @@ export class BasketService {
     return this.httpClient.post(this.apiUrl + 'baskets/add', product);
   }
 
-  deleteBasket(basketModel: BasketModel|any) {
-    console.log(this.apiUrl);
+  deleteBasket(basketModel: BasketModel|any): Observable<any>{
     console.log(basketModel);
-    return this.httpClient.delete(this.apiUrl + 'baskets/delete', basketModel);
+    return of(this.httpClient.delete(this.apiUrl + 'baskets/delete', basketModel).pipe(catchError(this.handleError)));
+  }
+
+  handleError(error: HttpErrorResponse) {
+    return throwError(error);
   }
 
 }

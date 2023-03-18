@@ -36,20 +36,6 @@ export class BasketPage implements ViewDidEnter {
       next: (res: any) => {
         this.total = 0;
         if (res.data.length === 0) {
-          // this.basketModel = [
-          //   {
-          //     id: 0,
-          //     productId: 0,
-          //     quantity: 0,
-          //     product: {
-          //       id: 0,
-          //       name: 'No products in basket',
-          //       price: 0,
-          //       imageUrl: '',
-          //       codeGuid: ''
-          //     }
-          //   }
-          // ];
           return;
         } else {
           this.basketModel = res.data;

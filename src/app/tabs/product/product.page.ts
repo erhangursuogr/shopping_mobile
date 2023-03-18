@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { AfterContentChecked, Component } from '@angular/core';
 import { LoadingController, ToastController, ViewDidEnter } from '@ionic/angular';
+import { AuthService } from '../auth/services/auth.service';
 import { BasketModel } from '../basket/models/basket-model';
 import { BasketService } from '../basket/services/basket.service';
 import { ErrorService } from '../services/error.service';
@@ -11,21 +12,27 @@ import { ProductService } from './services/product.service';
   templateUrl: 'product.page.html',
   styleUrls: ['product.page.scss']
 })
-export class ProductPage implements ViewDidEnter {
+export class ProductPage implements ViewDidEnter, AfterContentChecked {
 
   products: ProductModel[] = [];
   quantity = 1;
   isLoading = false;
   filterText = '';
+  isAuth = false;
 
   constructor(
     private productService: ProductService,
     private basketService: BasketService,
+    private authService: AuthService,
     private errorService: ErrorService,
     private toastrService: ToastController,
     private loadingCtrl: LoadingController
   ) { }
-  
+
+  ngAfterContentChecked(): void {
+    this.isAuth = this.authService.isAuthenticated();
+  }
+
   ionViewDidEnter(): void {
     this.getProducts();
   }

@@ -1,8 +1,10 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-item>
     <ion-title>
       Basket
     </ion-title>
+  </ion-item>
   </ion-toolbar>
 </ion-header>
 
@@ -15,17 +17,17 @@
         Checkout
       </ion-button>
     </ion-card-header>
-  
+
     <ion-card-content>
 
       <ion-card *ngFor="let basket of basketModel let index = index">
         <ion-card-content>
           <ion-label class="ion-text-center">
-            #{{ index + 1 }}            
+            #{{ index + 1 }}
             <!-- {{ basket?.quantity + ' x ' + basket?.product?.name + ' - ' + ((basket?.quantity) * (basket?.product?.price)) | currency: 'TRY':'symbol-narrow':'1.2-2'  }} -->
             <!-- (basket.product?.price)) | currency: 'TRY':'symbol-narrow':'1.2-2' -->
           </ion-label>
-         
+
       </ion-card-content>
 
         <ion-card-header class="ion-text-center">
@@ -33,20 +35,20 @@
           <ion-card-title>{{ basket.product?.name }}</ion-card-title>
         </ion-card-header>
         <ion-button (click)="presentAlert(basket)" expand="block" color="danger">
-          <ion-icon name="trash-outline"></ion-icon>              
+          <ion-icon name="trash-outline"></ion-icon>
         </ion-button>
-      
+
       </ion-card>
 
 
       <!-- <ion-list [inset]="true">
         <ion-item *ngFor="let basket of basketModel let index = index">
           <ion-label>
-            {{ index + 1 }}. {{ basket.product?.name }} - {{ basket.quantity }} x {{ basket.product?.price | currency: 'TRY':'symbol-narrow':'1.2-2' }}            
+            {{ index + 1 }}. {{ basket.product?.name }} - {{ basket.quantity }} x {{ basket.product?.price | currency: 'TRY':'symbol-narrow':'1.2-2' }}
           </ion-label>
         </ion-item>
       </ion-list> -->
-     
+
     </ion-card-content>
   </ion-card>
 </ion-content>

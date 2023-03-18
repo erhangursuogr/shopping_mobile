@@ -4,6 +4,6 @@ import { PaymentModel } from "./payment-model";
 export class SendPaymentModel{
 
     payment: PaymentModel = new PaymentModel();
-    basket: BasketModel[] = [];
+    baskets: BasketModel[] = [];
 
 }

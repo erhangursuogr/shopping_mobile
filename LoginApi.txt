@@ -1,0 +1,17 @@
+ser Login
+Type: Post
+https://webapi.angulareducation.com/api/users/login
+Object: 
+{
+  "email": "test@test.com",
+  "password": "test"
+}
+
+
+---------------------------------------------------------------
+
+Token Model
+{
+  "token": "string",
+  "expiration": "string"
+}
